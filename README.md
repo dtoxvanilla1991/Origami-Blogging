@@ -2,7 +2,7 @@
 
 - [General Information](#general-info "General information")
 - [Technologies](#technologies "Technologies used")
-- [Setup](#technologies "setup to view")
+- [Setup](#technologies "Setup to view")
 
 ## General info
 
