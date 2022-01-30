@@ -1,49 +1,45 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import classes from './Register.module.css';
 import {register} from '../../services';
 
-export class Register extends Component {
+const Register = (props)=> {
 
-  state = {username:'', password:'', password2:''}
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState(''); 
+  const [, setPassword2] = useState('');
 
 
-  handleChange(e){
-    let stateName = e.target.name; 
-    let newStateVal = e.target.value;
-    this.setState({[stateName]: newStateVal})
-  }
-
-  submitHandler(e){
+  const submitHandler = (e)=>{
     e.preventDefault();
-    if(this.state.username !=='' && this.state.password !==''){
-      register(this.state.username, this.state.password).then(res=>{
+    if(username !=='' && password !==''){
+      register(username, password).then(res=>{
         // redirect /
-        this.props.history.push('/login')
+        props.history.push('/login')
       }).catch(error=>{
-        this.props.history.push('/register')
+        props.history.push('/register')
       })
     }
+
   }
 
-  render() {
     return (
       <div className={classes.Register}>
         <h1>Register Page</h1>
         
-        <form onSubmit={(e)=>{this.submitHandler(e)}}>
+        <form onSubmit={submitHandler}>
           <div className={classes['form-control']}>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" name="username" onChange={(e)=>{this.handleChange(e)}}/>
+            <input type="text" id="username" name="username" onChange={(e)=>{setUsername(e.target.value)}}/>
           </div>
 
           <div className={classes['form-control']}>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" name="password" onChange={(e)=>{this.handleChange(e)}}/>
+            <input type="password" id="password" name="password" onChange={(e)=>{setPassword(e.target.value)}}/>
           </div>
 
           <div className={classes['form-control']}>
             <label htmlFor="password2">Re-Password</label>
-            <input type="password" id="password2" name="password2" onChange={(e)=>{this.handleChange(e)}}/>
+            <input type="password" id="password2" name="password2" onChange={(e)=>{setPassword2(e.target.value)}}/>
           </div>
 
           <div className={classes['form-control']}>
@@ -53,7 +49,7 @@ export class Register extends Component {
         </form>
       </div>
     )
-  }
+
 }
 
 export default Register

@@ -1,55 +1,54 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import classes from './Login.module.css'
 import {login} from '../../services'
-export class Login extends Component {
 
-  state = {username:'', password:''}
-  
-  handleChange(e){
-    let stateName = e.target.name; 
-    let newStateVal = e.target.value;
-    this.setState({[stateName]: newStateVal})
+const  Login = (props)=> {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const usernameChangeHandler = (e)=>{
+   setUsername(e.target.value)
   }
 
-  submitHandler(e){
+  const passwordChangeHandler = (e)=>{
+   setPassword(e.target.value)
+  }
+
+  const submitHandler = (e)=>{
     e.preventDefault();
-    if(this.state.username !=='' && this.state.password !==''){
-      login(this.state.username, this.state.password).then(res=>{
+    if(username !=='' && password !==''){
+      login(username, password).then(res=>{
         // redirect /
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user))
-        this.props.history.push('/')
-        this.props.auth(localStorage.getItem('token'))
+        props.history.push('/')
+        props.auth(localStorage.getItem('token'))
       }).catch(error=>{
-        this.props.history.push('/login')
+        props.history.push('/login')
       })
     }
   }
-  render() {
+
     return (
       <div className={classes.Register}>
         <h1>Login Page</h1>
         
-        <form onSubmit={(e)=>{this.submitHandler(e)}}>
+        <form onSubmit={submitHandler}>
           <div className={classes['form-control']}>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" name="username" onChange={(e)=>{this.handleChange(e)}}/>
-
+            <input type="text" id="username" name="username" onChange={usernameChangeHandler} value={username}/>
           </div>
-
           <div className={classes['form-control']}>
             <label htmlFor="">Password</label>
-            <input type="password" id="password" name="password" onChange={(e)=>{this.handleChange(e)}}/>
+            <input type="password" id="password" name="password" onChange={passwordChangeHandler} value={password}/>
           </div>
-
           <div className={classes['form-control']}>
               <button type="submit"> Login</button>  
           </div>
-
         </form>
       </div>
     )
-  }
 }
 
 export default Login
