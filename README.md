@@ -8,7 +8,7 @@
 <br />
 <div align="center">
 
-  <h1 align="center">Insurance Quote SPA</h1>
+  <h1 align="center">Origami Blogging</h1>
 
   <p align="center">
     <br />
