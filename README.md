@@ -51,7 +51,7 @@ MERN stack app website for bloggers, allowing people all around the world expres
 
 Users are able to register and login in, perform any CRUD operations, customize their profile. The app has easy to navigate structure and everything is oriented for a better user experience.
 
-
+<img width="1604" alt="image" src="https://user-images.githubusercontent.com/73205087/154596618-ffce983a-4e36-4fe0-b55e-3622c748342a.png">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
